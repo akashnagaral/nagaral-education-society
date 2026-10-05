@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SocialLinks } from "@/components/SocialIcons";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { site } from "@/lib/site-data";
 
@@ -25,7 +26,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/85 backdrop-blur-md">
-      <div className="section-pad mx-auto flex max-w-6xl items-center justify-between gap-4 py-3">
+      <div className="section-pad mx-auto flex max-w-6xl items-center gap-3 py-3 lg:gap-4">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
           <Image
             src="/images/nes-logo.png"
@@ -37,7 +38,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-4 xl:gap-5 2xl:gap-6 lg:flex">
           {links.map((link) => {
             const active =
               link.href === "/careers"
@@ -49,7 +50,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm tracking-wide transition-colors ${
+                className={`shrink-0 text-sm tracking-wide transition-colors ${
                   active ? "text-gold" : "text-cream/75 hover:text-gold"
                 }`}
               >
@@ -57,6 +58,13 @@ export function Header() {
               </Link>
             );
           })}
+        </nav>
+
+        <div className="ml-auto hidden items-center gap-3 lg:flex">
+          <SocialLinks
+            className="flex items-center gap-2.5"
+            iconClassName="h-4 w-4"
+          />
           <a
             href={site.whatsappHref}
             target="_blank"
@@ -66,11 +74,11 @@ export function Header() {
           >
             <WhatsAppIcon className="h-5 w-5" />
           </a>
-        </nav>
+        </div>
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center border border-line text-cream lg:hidden"
+          className="ml-auto inline-flex h-10 w-10 items-center justify-center border border-line text-cream lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -97,11 +105,12 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <SocialLinks className="flex items-center gap-4 pt-2" iconClassName="h-5 w-5" />
             <a
               href={site.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 pt-2 text-[#25D366]"
+              className="inline-flex items-center gap-2 pt-1 text-[#25D366]"
               aria-label="WhatsApp"
             >
               <WhatsAppIcon className="h-5 w-5" />
