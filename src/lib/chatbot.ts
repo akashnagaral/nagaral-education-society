@@ -3,6 +3,8 @@ import { colleges, faqs, site } from "@/lib/site-data";
 export type ChatReply = {
   text: string;
   suggestions?: string[];
+  /** When true, UI should emphasise WhatsApp handoff */
+  handoff?: boolean;
 };
 
 const extras: { keys: string[]; answer: string }[] = [
@@ -100,8 +102,9 @@ export function answerChat(userText: string): ChatReply {
   }
 
   return {
-    text: `I don't have a precise answer for that yet. WhatsApp admissions on ${site.phone} — they'll help you quickly. You can also browse the FAQ section on this page.`,
+    text: `I can help with common questions about courses, hostels, results, and timings — but this one needs our admissions team. Please continue on WhatsApp (${site.phone}) and they'll assist you personally.`,
     suggestions: chatSuggestions,
+    handoff: true,
   };
 }
 

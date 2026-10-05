@@ -15,12 +15,22 @@ import {
 } from "@/lib/portal-users";
 import { formatMaxUpload, MAX_UPLOAD_BYTES } from "@/lib/portal-limits";
 
-type Tab = "feed" | "upload";
+type Tab = "feed" | "upload" | "leads";
+
+type AdmissionLead = {
+  id: string;
+  phone: string;
+  note: string;
+  source: string;
+  status: "new" | "contacted";
+  createdAt: string;
+};
 
 export function PortalClient() {
   const router = useRouter();
   const [user, setUser] = useState<SessionUser | null>(null);
   const [docs, setDocs] = useState<PortalDocument[]>([]);
+  const [leads, setLeads] = useState<AdmissionLead[]>([]);
   const [tab, setTab] = useState<Tab>("feed");
   const [filter, setFilter] = useState<"all" | DocType>("all");
   const [loading, setLoading] = useState(true);
@@ -63,6 +73,17 @@ export function PortalClient() {
         setError(docsData.error || "Could not load documents");
       } else {
         setDocs(docsData.documents ?? []);
+      }
+
+      if (canUpload(meData.user)) {
+        const leadsRes = await fetch("/api/portal/leads");
+        const leadsData = (await leadsRes.json()) as {
+          leads?: AdmissionLead[];
+          error?: string;
+        };
+        if (leadsRes.ok) {
+          setLeads(leadsData.leads ?? []);
+        }
       }
     } catch {
       setError(
@@ -137,6 +158,22 @@ export function PortalClient() {
     await load();
   }
 
+  async function markLeadDone(id: string) {
+    const res = await fetch("/api/portal/leads", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    if (!res.ok) {
+      const data = (await res.json()) as { error?: string };
+      setError(data.error || "Update failed");
+      return;
+    }
+    setLeads((prev) =>
+      prev.map((l) => (l.id === id ? { ...l, status: "contacted" } : l)),
+    );
+  }
+
   if (loading || !user) {
     return (
       <div className="section-pad py-20 text-center text-muted">Loading portal…</div>
@@ -144,6 +181,7 @@ export function PortalClient() {
   }
 
   const staff = canUpload(user);
+  const newLeadCount = leads.filter((l) => l.status === "new").length;
 
   return (
     <div className="section-pad section-y">
@@ -196,6 +234,22 @@ export function PortalClient() {
               }`}
             >
               Upload
+            </button>
+          ) : null}
+          {staff ? (
+            <button
+              type="button"
+              onClick={() => setTab("leads")}
+              className={`px-4 py-2.5 text-sm ${
+                tab === "leads" ? "border-b-2 border-gold text-gold" : "text-cream/70"
+              }`}
+            >
+              Admission enquiries
+              {newLeadCount > 0 ? (
+                <span className="ml-2 inline-flex min-w-5 items-center justify-center rounded-sm bg-gold px-1.5 text-[10px] font-bold text-on-gold">
+                  {newLeadCount}
+                </span>
+              ) : null}
             </button>
           ) : null}
         </div>
@@ -277,7 +331,63 @@ export function PortalClient() {
               )}
             </ul>
           </div>
-        ) : (
+        ) : null}
+
+        {tab === "leads" && staff ? (
+          <div className="mt-6">
+            <p className="text-sm text-muted">
+              Numbers saved from the website chatbot for an admissions callback.
+              Call or WhatsApp them and mark as contacted.
+            </p>
+            <ul className="mt-6 space-y-3">
+              {leads.length === 0 ? (
+                <li className="border border-line px-5 py-8 text-sm text-muted">
+                  No admission enquiries yet.
+                </li>
+              ) : (
+                leads.map((lead) => (
+                  <li
+                    key={lead.id}
+                    className="border border-line bg-ink-soft/40 px-5 py-4"
+                  >
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.14em] text-gold">
+                          Admission query · {lead.status}
+                        </p>
+                        <a
+                          href={`https://wa.me/91${lead.phone}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-1 block text-lg text-cream hover:text-gold"
+                        >
+                          {lead.phone}
+                        </a>
+                        {lead.note ? (
+                          <p className="mt-2 text-sm text-cream/75">{lead.note}</p>
+                        ) : null}
+                        <p className="mt-2 text-xs text-muted">
+                          {new Date(lead.createdAt).toLocaleString()} · {lead.source}
+                        </p>
+                      </div>
+                      {lead.status === "new" ? (
+                        <button
+                          type="button"
+                          onClick={() => void markLeadDone(lead.id)}
+                          className="border border-line px-3 py-2 text-sm text-cream hover:border-gold hover:text-gold"
+                        >
+                          Mark contacted
+                        </button>
+                      ) : null}
+                    </div>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        ) : null}
+
+        {tab === "upload" && staff ? (
           <form onSubmit={onUpload} className="mt-8 max-w-xl space-y-4">
             <p className="text-sm text-muted">
               Upload for {collegeLabel(user.college)}. Choose who should see it
@@ -365,7 +475,7 @@ export function PortalClient() {
               {uploading ? "Uploading…" : "Upload document"}
             </button>
           </form>
-        )}
+        ) : null}
       </div>
     </div>
   );

@@ -25,6 +25,21 @@ update portal_documents
 set expires_at = created_at + interval '7 days'
 where expires_at is null;
 
+-- Website chatbot admission callback leads (admin portal)
+create table if not exists admission_leads (
+  id uuid primary key default gen_random_uuid(),
+  phone text not null,
+  note text not null default '',
+  source text not null default 'chatbot',
+  status text not null default 'new' check (status in ('new', 'contacted')),
+  created_at timestamptz not null default now()
+);
+
+create index if not exists admission_leads_created_at_idx
+  on admission_leads (created_at desc);
+
+alter table admission_leads enable row level security;
+
 insert into storage.buckets (id, name, public)
 values ('portal-docs', 'portal-docs', true)
 on conflict (id) do nothing;

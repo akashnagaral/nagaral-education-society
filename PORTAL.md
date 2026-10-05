@@ -51,6 +51,10 @@ SUPABASE_SERVICE_ROLE_KEY=eyJ...
 7. Restart the app: stop old server, then `npm run dev`.
 8. Open http://localhost:3000/login → `admin.ntss@nes.com` / `Dharwad#Vault38` → Upload a PDF.
 
+### Admission chatbot leads
+
+After the main schema is applied, confirm table **`admission_leads`** exists (included in `supabase/schema.sql`). Website visitors who optionally save a mobile in **Ask NES** appear under portal → **Admission enquiries** (admin / faculty logins).
+
 Without `.env.local`, uploads still work locally in `.data/` (not for Vercel production).
 
 ## Important
