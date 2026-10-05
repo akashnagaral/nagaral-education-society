@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -7,7 +8,6 @@ import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { site } from "@/lib/site-data";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/#about", label: "About" },
   { href: "/#courses", label: "Courses" },
   { href: "/#colleges", label: "Colleges" },
@@ -26,6 +26,17 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/85 backdrop-blur-md">
       <div className="section-pad mx-auto flex max-w-6xl items-center justify-between gap-4 py-3">
+        <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+          <Image
+            src="/images/nes-logo.png"
+            alt={`${site.name} logo`}
+            width={40}
+            height={40}
+            className="h-9 w-9 object-contain sm:h-10 sm:w-10"
+            priority
+          />
+        </Link>
+
         <nav className="hidden items-center gap-5 lg:flex xl:gap-6">
           {links.map((link) => {
             const active =
@@ -33,9 +44,7 @@ export function Header() {
                 ? pathname.startsWith("/careers")
                 : link.href === "/login"
                   ? pathname.startsWith("/login") || pathname.startsWith("/portal")
-                  : link.href === "/"
-                    ? pathname === "/"
-                    : false;
+                  : false;
             return (
               <Link
                 key={link.href}
@@ -58,14 +67,6 @@ export function Header() {
             <WhatsAppIcon className="h-5 w-5" />
           </a>
         </nav>
-
-        <Link
-          href="/"
-          className="text-sm tracking-wide text-cream/80 hover:text-gold lg:hidden"
-          onClick={() => setOpen(false)}
-        >
-          Home
-        </Link>
 
         <button
           type="button"
