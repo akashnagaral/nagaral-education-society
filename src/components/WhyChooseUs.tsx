@@ -11,16 +11,20 @@ const highlights = [
     text: "PUC I & II Science only — with PCMB and PCMCS as subject combinations (branches), not separate courses.",
   },
   {
+    title: "Evening doubt clearing",
+    text: "Teachers visit study rooms every evening, subject by subject, and stay with students until doubts are cleared.",
+  },
+  {
+    title: "Labs, sports & hostels",
+    text: "Science labs, tennis · cricket · football grounds, separate hostels, and hygienic nutritious food.",
+  },
+  {
     title: "Experienced faculty",
     text: "Seasoned teachers including IIT / NIT backgrounds and PhD holders — plus NEET · CET · JEE · NDA coaching.",
   },
   {
     title: "Guidance by professionals",
     text: "Doctors, engineers, and IAS / KAS officers advise the society on academics and careers.",
-  },
-  {
-    title: "Separate hostels & hygienic food",
-    text: "Boys’ and girls’ hostels with supervised care, nutritious meals, and day-scholar food options.",
   },
 ];
 

@@ -19,6 +19,9 @@ const BUCKET = "portal-docs";
 /** Keep portal uploads for 7 days only (free-tier friendly) */
 export const DOC_RETENTION_DAYS = 7;
 
+/** Max live portal files — oldest are removed first if over limit (free storage) */
+export const MAX_PORTAL_DOCUMENTS = 40;
+
 export { MAX_UPLOAD_BYTES, formatMaxUpload, assertUploadSize } from "@/lib/portal-limits";
 
 function expiresAtFrom(createdAt: string | Date) {
@@ -116,8 +119,54 @@ export async function purgeExpiredDocuments() {
   return removed;
 }
 
+/** If too many live files, delete oldest first to free space */
+export async function purgeOldestBeyondLimit(limit = MAX_PORTAL_DOCUMENTS) {
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabaseAdmin();
+    if (!supabase) return 0;
+
+    const { data: rows, error } = await supabase
+      .from("portal_documents")
+      .select("id, file_path, created_at")
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    if (!rows || rows.length <= limit) return 0;
+
+    const toRemove = rows.slice(0, rows.length - limit);
+    const paths = toRemove.map((row) => String(row.file_path));
+    if (paths.length) {
+      await supabase.storage.from(BUCKET).remove(paths);
+    }
+    const ids = toRemove.map((row) => String(row.id));
+    const { error: delError } = await supabase
+      .from("portal_documents")
+      .delete()
+      .in("id", ids);
+    if (delError) throw new Error(delError.message);
+    return ids.length;
+  }
+
+  const docs = await readLocalMeta();
+  if (docs.length <= limit) return 0;
+  const sorted = [...docs].sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
+  );
+  const toRemove = sorted.slice(0, sorted.length - limit);
+  const removeIds = new Set(toRemove.map((d) => d.id));
+  for (const doc of toRemove) {
+    try {
+      await fs.unlink(path.join(LOCAL_FILES, doc.filePath));
+    } catch {
+      /* ignore */
+    }
+  }
+  await writeLocalMeta(docs.filter((d) => !removeIds.has(d.id)));
+  return toRemove.length;
+}
+
 export async function listDocuments(): Promise<PortalDocument[]> {
   await purgeExpiredDocuments().catch(() => 0);
+  await purgeOldestBeyondLimit().catch(() => 0);
 
   if (isSupabaseConfigured()) {
     const supabase = getSupabaseAdmin();
@@ -141,6 +190,7 @@ export async function listDocumentsForUser(user: SessionUser) {
 export async function createDocument(input: CreateDocInput): Promise<PortalDocument> {
   assertUploadSize(input.file);
   await purgeExpiredDocuments().catch(() => 0);
+  await purgeOldestBeyondLimit().catch(() => 0);
 
   const id = randomUUID();
   const safeName = input.file.name.replace(/[^\w.\-]+/g, "_");
@@ -153,12 +203,26 @@ export async function createDocument(input: CreateDocInput): Promise<PortalDocum
     const supabase = getSupabaseAdmin();
     if (!supabase) throw new Error("Supabase is not configured");
 
-    const { error: uploadError } = await supabase.storage
-      .from(BUCKET)
-      .upload(filePath, buffer, {
+    let uploadError = (
+      await supabase.storage.from(BUCKET).upload(filePath, buffer, {
         contentType: input.file.type || "application/octet-stream",
         upsert: false,
-      });
+      })
+    ).error;
+
+    // Free space: drop oldest files and retry once if storage is full
+    if (uploadError) {
+      await purgeExpiredDocuments().catch(() => 0);
+      await purgeOldestBeyondLimit(Math.max(10, MAX_PORTAL_DOCUMENTS - 5)).catch(
+        () => 0,
+      );
+      uploadError = (
+        await supabase.storage.from(BUCKET).upload(filePath, buffer, {
+          contentType: input.file.type || "application/octet-stream",
+          upsert: false,
+        })
+      ).error;
+    }
     if (uploadError) throw new Error(uploadError.message);
 
     const { data: publicData } = supabase.storage.from(BUCKET).getPublicUrl(filePath);

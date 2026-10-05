@@ -1,10 +1,12 @@
 # Portal + Supabase setup
 
-## Auto-delete (1 week)
+## Auto-delete (free storage)
 
 Uploaded documents are kept for **7 days**, then removed automatically
 (file + database row) whenever someone opens the portal or uploads.
-This helps stay within Supabase free storage.
+
+Also, if more than **40** live files exist, the **oldest** are deleted first
+so free Supabase storage stays available. No paid plan required for this.
 
 ## Upload size limit
 

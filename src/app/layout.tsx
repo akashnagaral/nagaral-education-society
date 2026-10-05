@@ -3,6 +3,7 @@ import { Fraunces, Sora } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { StickyContact } from "@/components/StickyContact";
+import { site } from "@/lib/site-data";
 import "./globals.css";
 
 const display = Fraunces({
@@ -17,13 +18,80 @@ const body = Sora({
   weight: ["300", "400", "500", "600"],
 });
 
+const siteUrl = "https://nagaral.in";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Nagaral Education Society®️ | Quality PU Science Education",
+    default:
+      "Best PU Science College in Dharwad | Nagaral Education Society®️",
     template: "%s | Nagaral Education Society",
   },
   description:
-    "Nagaral Education Society®️ in Dharwad — NTSS PU College & NES Alnavar. PUC Science with NEET, CET, JEE & NDA coaching. Admissions open.",
+    "Looking for the best PU college / best PU Science college in Dharwad? Nagaral Education Society® collaborates with NTSS PU College, Dharwad and NES PU Science College, Alnavar — PUC Science, NEET, CET, JEE & NDA coaching. 100% II PU results 2025–2026. Admissions open.",
+  keywords: [
+    "best PU college in Dharwad",
+    "best PU Science college Dharwad",
+    "best college in Dharwad",
+    "PUC Science Dharwad",
+    "NTSS PU College Dharwad",
+    "NES PU Science College Alnavar",
+    "NEET coaching Dharwad",
+    "JEE CET NDA coaching Dharwad",
+    "Nagaral Education Society",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteUrl,
+    siteName: site.name,
+    title: "Best PU Science College in Dharwad | Nagaral Education Society®️",
+    description:
+      "Focused PU Science in Dharwad with NTSS & NES Alnavar — 100% II PU board results, NEET · CET · JEE · NDA coaching. Admissions open.",
+    images: [
+      {
+        url: "/images/hero-students.png",
+        width: 1200,
+        height: 630,
+        alt: "Nagaral Education Society — PU Science colleges in Dharwad",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best PU Science College in Dharwad | Nagaral Education Society®️",
+    description:
+      "NTSS Dharwad & NES Alnavar — PUC Science with NEET, CET, JEE & NDA coaching. Admissions open.",
+    images: ["/images/hero-students.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "Nagaral Education Society",
+  alternateName: "NES",
+  url: siteUrl,
+  logo: `${siteUrl}/images/nes-logo.png`,
+  description:
+    "Nagaral Education Society® — focused PU Science education in Dharwad through collaboration with NTSS PU College and NES PU Science College, Alnavar.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Dharwad",
+    addressRegion: "Karnataka",
+    addressCountry: "IN",
+  },
+  telephone: "+919019939321",
+  email: site.email,
+  areaServed: "Dharwad",
+  sameAs: [site.social.youtube, site.social.instagram, site.social.telegram],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -33,6 +101,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ink text-cream">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { facilities, site } from "@/lib/site-data";
+import Link from "next/link";
+import { colleges, facilities, site } from "@/lib/site-data";
 
 export function AboutSection() {
   return (
@@ -98,19 +99,31 @@ export function AboutSection() {
         </div>
 
         <div className="space-y-5">
-          <div className="relative aspect-[4/3] overflow-hidden border border-line">
-            <Image
-              src="/images/ntss-dharwad-campus.png"
-              alt="NTSS PU College, Dharwad"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 40vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent" />
-            <p className="absolute bottom-3 left-3 text-xs uppercase tracking-[0.16em] text-gold">
-              NTSS · Near Kelageri, Dharwad
-            </p>
-          </div>
+          {colleges.map((college) => (
+            <Link
+              key={college.id}
+              href={college.slug}
+              className="group block overflow-hidden border border-line transition hover:border-gold/50"
+            >
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src={college.image}
+                  alt={college.name}
+                  fill
+                  className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3">
+                  <p className="text-xs uppercase tracking-[0.16em] text-gold">
+                    {college.shortName}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-cream">{college.name}</p>
+                  <p className="mt-0.5 text-[11px] text-cream/65">{college.location}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
           <ul className="space-y-2 text-sm text-cream/75">
             {facilities.slice(0, 5).map((item) => (
               <li key={item} className="flex gap-2">

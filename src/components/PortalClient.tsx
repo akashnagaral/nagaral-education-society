@@ -345,7 +345,9 @@ export function PortalClient() {
                 required
               />
               <p className="mt-2 text-xs text-muted">
-                Keep files under {formatMaxUpload()} so free storage lasts. Portal files auto-delete after 7 days.
+                Keep files under {formatMaxUpload()} so free storage lasts.
+                Files auto-delete after 7 days; oldest files are cleared first if
+                storage fills up.
               </p>
             </div>
             <button

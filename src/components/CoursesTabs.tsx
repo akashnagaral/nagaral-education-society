@@ -176,25 +176,43 @@ export function CoursesTabs() {
           {active === "campus" ? (
             <div className="space-y-6">
               <p className="max-w-2xl text-sm leading-relaxed text-muted">
-                Campuses in Dharwad and Alnavar are built for serious study —
-                labs, separate hostels with hygienic food, guidance, and a calm
-                routine for board and entrance preparation.
+                Education-oriented campuses in Dharwad and Alnavar — science
+                labs, sports grounds, separate hostels with hygienic food, and
+                evening teacher support in study rooms.
               </p>
-              <div className="border border-gold/35 bg-ink-soft/40 px-5 py-6">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-gold">
-                  {site.hostel.title}
-                </p>
-                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-cream/75">
-                  {site.hostel.text}
-                </p>
-                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                  {site.hostel.points.map((item) => (
-                    <li key={item} className="flex gap-2 text-sm text-cream/80">
-                      <span className="mt-2 h-1 w-1 shrink-0 bg-gold" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+              <div className="grid gap-4 lg:grid-cols-2">
+                <div className="border border-gold/35 bg-ink-soft/40 px-5 py-6">
+                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-gold">
+                    {site.hostel.title}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                    {site.hostel.text}
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {site.hostel.points.map((item) => (
+                      <li key={item} className="flex gap-2 text-sm text-cream/80">
+                        <span className="mt-2 h-1 w-1 shrink-0 bg-gold" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="border border-gold/35 bg-ink-soft/40 px-5 py-6">
+                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-gold">
+                    {site.eveningMentoring.title}
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                    {site.eveningMentoring.text}
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {site.eveningMentoring.points.map((item) => (
+                      <li key={item} className="flex gap-2 text-sm text-cream/80">
+                        <span className="mt-2 h-1 w-1 shrink-0 bg-gold" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <ul className="grid gap-3 sm:grid-cols-2">
                 {facilities.map((item) => (

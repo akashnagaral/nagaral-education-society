@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { site } from "@/lib/site-data";
+import { colleges, site } from "@/lib/site-data";
 
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
       <Image
         src="/images/hero-students.png"
-        alt="Students aspiring through education — Nagaral Education Society, Dharwad"
+        alt="Best PU Science college in Dharwad — Nagaral Education Society students"
         fill
         priority
         className="object-cover object-[center_40%]"
@@ -29,7 +29,7 @@ export function Hero() {
         <div className="max-w-2xl">
           <Image
             src="/images/nes-logo.png"
-            alt={`${site.name} logo`}
+            alt={`${site.name} logo — PU Science colleges in Dharwad`}
             width={120}
             height={120}
             className="logo-glow animate-rise h-24 w-24 object-contain opacity-70 sm:h-28 sm:w-28"
@@ -55,6 +55,30 @@ export function Hero() {
           <p className="animate-rise-delay-2 mt-3 max-w-xl text-sm leading-relaxed text-cream/80 sm:text-base">
             {site.heroLead}
           </p>
+
+          <div className="animate-rise-delay-3 mt-6">
+            <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-gold/90">
+              Collaborated colleges
+            </p>
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-cream/85">
+              {colleges.map((college, index) => (
+                <span key={college.id} className="inline-flex items-center gap-3">
+                  {index > 0 ? (
+                    <span className="text-cream/35" aria-hidden>
+                      ·
+                    </span>
+                  ) : null}
+                  <Link
+                    href={college.slug}
+                    className="underline-offset-4 transition hover:text-gold hover:underline"
+                  >
+                    {college.name}
+                  </Link>
+                </span>
+              ))}
+            </div>
+          </div>
+
           <div className="animate-rise-delay-3 mt-8 flex flex-wrap items-center gap-3">
             <a
               href={site.whatsappHref}

@@ -4,7 +4,6 @@ import { AchievementsSection } from "@/components/AchievementsSection";
 import { Contact } from "@/components/Contact";
 import { CoursesTabs } from "@/components/CoursesTabs";
 import { FaqSection } from "@/components/FaqSection";
-import { Gallery } from "@/components/Gallery";
 import { Hero } from "@/components/Hero";
 import { Leadership } from "@/components/Leadership";
 import { ResultsHighlight } from "@/components/ResultsHighlight";
@@ -21,7 +20,6 @@ export default function Home() {
       <AffiliatedColleges />
       <AchievementsSection />
       <Leadership />
-      <Gallery />
       <FaqSection />
       <Contact />
     </>

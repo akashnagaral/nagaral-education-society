@@ -4,9 +4,10 @@ import { CollegePage } from "@/components/CollegePage";
 import { colleges } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "NTSS PU College, Dharwad",
+  title: "NTSS PU College Dharwad | Best PU Science College Collaboration",
   description:
-    "NTSS PU College, Dharwad — in collaboration with Nagaral Education Society® since 2024. PUC with NEET, JEE, CET & NDA coaching.",
+    "NTSS PU College, Dharwad — one of Dharwad’s focused PU Science colleges in collaboration with Nagaral Education Society®. PUC Science, NEET, JEE, CET & NDA coaching. Admissions open.",
+  alternates: { canonical: "/colleges/ntss-dharwad" },
 };
 
 export default function NtssDharwadPage() {
