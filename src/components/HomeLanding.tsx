@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
+import { RealStoriesSection } from "@/components/RealStoriesSection";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { colleges, site } from "@/lib/site-data";
 
@@ -137,6 +138,8 @@ export function HomeLanding() {
           </div>
         </div>
       </section>
+
+      <RealStoriesSection />
     </>
   );
 }

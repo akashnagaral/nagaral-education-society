@@ -25,7 +25,8 @@ function activeHash() {
   const hash = window.location.hash.replace(/^#/, "");
   if (!hash || hash === "home") return "home";
   if (hash === "coaching") return "courses";
-  if (hash === "toppers" || hash === "stories") return "achievements";
+  if (hash === "stories") return "home";
+  if (hash === "toppers") return "achievements";
   if (hash === "guide" || hash === "founder") return "leadership";
   if (hash === "why-us") return "about";
   return hash;

@@ -289,7 +289,8 @@ export const successStories: {
     name: "Sachin S. Budhihal",
     result: "NEET 446",
     outcome: "Mandya Institute of Medical Science",
-    note: "Medical pathway through focused NEET preparation.",
+    note:
+      "Board exams and NEET felt like one long year. Our teachers did not let Biology and Chemistry stay ‘extra’ — they were part of every week. When 446 came, I knew the seat at Mandya was because we practised like it mattered, not just read the textbook once.",
     photo: "/images/achievers/sachin-budhihal.png",
   },
   {
@@ -297,7 +298,8 @@ export const successStories: {
     name: "Ameer Araligida",
     result: "JEE — 2nd Rank",
     outcome: "Merchant Navy Officer",
-    note: "Dreams do come true with dedicated coaching and guidance.",
+    note:
+      "I did not want a routine engineering college — I wanted a rank that opened real options. Evening problem-solving, mock tests, and faculty who pushed when I slacked got me 2nd in JEE here. Today I am in the Merchant Navy; that path started in those PU classrooms in Dharwad.",
     photo: "/images/achievers/ameer-araligida.png",
   },
 ];

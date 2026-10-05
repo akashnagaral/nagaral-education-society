@@ -46,7 +46,8 @@ export function sectionFromHash(raw?: string): HomeSectionId {
   );
   if (!hash || hash === "home") return "home";
   if (hash === "coaching" || hash === "courses") return "courses";
-  if (hash === "toppers" || hash === "stories") return "achievements";
+  if (hash === "stories") return "home";
+  if (hash === "toppers") return "achievements";
   if (hash === "guide" || hash === "founder") return "leadership";
   if (hash === "why-us") return "why-us";
   if (hash === "about") return "about";
@@ -75,9 +76,17 @@ export function HomeView() {
 
   useEffect(() => {
     const sync = () => {
-      setSection(sectionFromHash());
+      const next = sectionFromHash();
+      setSection(next);
       setTick((n) => n + 1);
-      window.scrollTo(0, 0);
+      const raw = window.location.hash.replace(/^#/, "");
+      if (next === "home" && raw === "stories") {
+        window.requestAnimationFrame(() => {
+          document.getElementById("stories")?.scrollIntoView({ behavior: "smooth" });
+        });
+      } else {
+        window.scrollTo(0, 0);
+      }
     };
 
     sync();
@@ -103,7 +112,13 @@ export function HomeView() {
           const next = sectionFromHash(hash);
           setSection(next);
           setTick((n) => n + 1);
-          window.scrollTo(0, 0);
+          if (next === "home" && hash === "stories") {
+            window.requestAnimationFrame(() => {
+              document.getElementById("stories")?.scrollIntoView({ behavior: "smooth" });
+            });
+          } else {
+            window.scrollTo(0, 0);
+          }
           if (window.location.hash.replace(/^#/, "") !== hash) {
             window.history.pushState(null, "", `#${hash}`);
           }
