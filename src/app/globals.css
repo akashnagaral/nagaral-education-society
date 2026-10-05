@@ -196,13 +196,55 @@ a {
   }
 }
 
-.ask-nes-pulse {
+.ask-nes-pulse,
+.enquire-pulse {
   animation: ask-nes-pulse 1.8s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: scale(1.045);
+  transform-origin: center top;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.section-panel {
+  animation: section-zoom-out 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes section-zoom-out {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .admissions-blink,
-  .ask-nes-pulse {
+  .ask-nes-pulse,
+  .enquire-pulse {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .section-panel {
     animation: none;
   }
 }

@@ -161,23 +161,23 @@ export function Chatbot() {
   });
 
   return (
-    <div className="fixed bottom-5 left-5 z-[60] flex flex-col items-start gap-2">
+    <div className="fixed right-0 top-[42%] z-[60] flex -translate-y-1/2 flex-row items-stretch">
       {open ? (
         <div
-          className="flex h-80 max-w-[calc(100vw-2.5rem)] overflow-hidden border border-line bg-ink/95 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md"
+          className="mr-0 flex h-80 max-w-[calc(100vw-3.5rem)] overflow-hidden border border-line bg-ink/95 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md"
           role="dialog"
-          aria-label="Nagaral Education Society assistant"
+          aria-label="Enquire with Nagaral Education Society"
         >
           <div className="flex w-72 max-w-full min-w-0 flex-col">
             <div className="flex items-start justify-between gap-2 border-b border-line px-3 py-2.5">
               <p className="min-w-0 text-sm font-medium leading-snug text-cream">
-                Nagaral Education Society&apos;s assistant
+                Enquire with us
               </p>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="shrink-0 px-1 text-base leading-none text-muted hover:text-cream"
-                aria-label="Close chat"
+                aria-label="Close enquiry chat"
               >
                 ×
               </button>
@@ -318,13 +318,14 @@ export function Chatbot() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`ask-nes-pulse border border-gold bg-gold px-5 py-3 text-sm font-semibold text-on-gold shadow-lg transition hover:bg-gold-bright ${
+        className={`enquire-pulse border border-r-0 border-line bg-gold px-2.5 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-on-gold shadow-lg transition hover:bg-gold-bright md:px-3 md:py-5 ${
           open ? "opacity-90" : ""
         }`}
+        style={{ writingMode: "vertical-rl" }}
         aria-expanded={open}
-        aria-label={open ? "Close chatbot" : "Open admissions chatbot"}
+        aria-label={open ? "Close enquiry chat" : "Enquire with us"}
       >
-        {open ? "Close chat" : "Ask NES"}
+        {open ? "Close" : "Enquire us"}
       </button>
     </div>
   );

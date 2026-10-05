@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { SocialLinks } from "@/components/SocialIcons";
@@ -38,6 +40,11 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/#about" className="hover:text-gold">
+                About
+              </Link>
+            </li>
             <li>
               <Link href="/careers" className="hover:text-gold">
                 Careers

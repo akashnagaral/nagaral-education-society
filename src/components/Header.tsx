@@ -3,32 +3,68 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { SocialLinks } from "@/components/SocialIcons";
+import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { site } from "@/lib/site-data";
 
 const links = [
-  { href: "/#about", label: "About" },
-  { href: "/#courses", label: "Courses" },
-  { href: "/#colleges", label: "Colleges" },
-  { href: "/#achievements", label: "Achievements" },
-  { href: "/#leadership", label: "Leadership" },
-  { href: "/careers", label: "Careers" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
-  { href: "/login", label: "Portal" },
+  { href: "/#home", label: "Home", hash: "home" },
+  { href: "/#about", label: "About", hash: "about" },
+  { href: "/#courses", label: "Courses", hash: "courses" },
+  { href: "/#colleges", label: "Colleges", hash: "colleges" },
+  { href: "/#achievements", label: "Achievements", hash: "achievements" },
+  { href: "/#leadership", label: "Leadership", hash: "leadership" },
+  { href: "/careers", label: "Careers", hash: null },
+  { href: "/#faq", label: "FAQ", hash: "faq" },
+  { href: "/#contact", label: "Contact", hash: "contact" },
+  { href: "/login", label: "Portal", hash: null },
 ];
+
+function activeHash() {
+  if (typeof window === "undefined") return "home";
+  const hash = window.location.hash.replace(/^#/, "");
+  if (!hash || hash === "home") return "home";
+  if (hash === "coaching") return "courses";
+  if (hash === "toppers" || hash === "stories") return "achievements";
+  if (hash === "guide" || hash === "founder") return "leadership";
+  if (hash === "why-us") return "about";
+  return hash;
+}
 
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [hash, setHash] = useState("home");
+
+  useEffect(() => {
+    const sync = () => setHash(activeHash());
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, [pathname]);
+
+  const onHome = pathname === "/";
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/85 backdrop-blur-md">
       <div className="section-pad mx-auto flex max-w-6xl items-center gap-3 py-3 lg:gap-4">
-        <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+        <Link
+          href="/#home"
+          className="shrink-0"
+          onClick={(e) => {
+            setOpen(false);
+            setHash("home");
+            if (onHome) {
+              e.preventDefault();
+              if (window.location.hash.replace(/^#/, "") === "home" || !window.location.hash) {
+                window.history.replaceState(null, "", "#home");
+                window.dispatchEvent(new HashChangeEvent("hashchange"));
+              } else {
+                window.location.hash = "home";
+              }
+            }
+          }}
+        >
           <Image
             src="/images/nes-logo.png"
             alt={`${site.name} logo`}
@@ -41,12 +77,11 @@ export function Header() {
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-4 xl:gap-5 2xl:gap-6 lg:flex">
           {links.map((link) => {
-            const active =
-              link.href === "/careers"
+            const active = link.hash
+              ? onHome && hash === link.hash
+              : link.href === "/careers"
                 ? pathname.startsWith("/careers")
-                : link.href === "/login"
-                  ? pathname.startsWith("/login") || pathname.startsWith("/portal")
-                  : false;
+                : pathname.startsWith("/login") || pathname.startsWith("/portal");
             return (
               <Link
                 key={link.href}
@@ -54,6 +89,17 @@ export function Header() {
                 className={`shrink-0 text-sm tracking-wide transition-colors ${
                   active ? "text-gold" : "text-cream/75 hover:text-gold"
                 }`}
+                onClick={(e) => {
+                  if (!link.hash || !onHome) return;
+                  // Force hash update — Next.js Link often skips hashchange on /
+                  e.preventDefault();
+                  setHash(link.hash);
+                  if (window.location.hash.replace(/^#/, "") === link.hash) {
+                    window.dispatchEvent(new HashChangeEvent("hashchange"));
+                  } else {
+                    window.location.hash = link.hash;
+                  }
+                }}
               >
                 {link.label}
               </Link>
@@ -61,21 +107,8 @@ export function Header() {
           })}
         </nav>
 
-        <div className="ml-auto hidden items-center gap-3 lg:flex">
-          <SocialLinks
-            className="flex items-center gap-2.5"
-            iconClassName="h-4 w-4"
-          />
+        <div className="ml-auto hidden items-center lg:flex">
           <ThemeToggle />
-          <a
-            href={site.whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-on-gold transition hover:brightness-110"
-            aria-label="WhatsApp"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-          </a>
         </div>
 
         <div className="ml-auto flex items-center gap-2 lg:hidden">
@@ -105,22 +138,21 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className="py-1 text-cream/90"
-                onClick={() => setOpen(false)}
+                onClick={(e) => {
+                  setOpen(false);
+                  if (!link.hash || !onHome) return;
+                  e.preventDefault();
+                  setHash(link.hash);
+                  if (window.location.hash.replace(/^#/, "") === link.hash) {
+                    window.dispatchEvent(new HashChangeEvent("hashchange"));
+                  } else {
+                    window.location.hash = link.hash;
+                  }
+                }}
               >
                 {link.label}
               </Link>
             ))}
-            <SocialLinks className="flex items-center gap-4 pt-2" iconClassName="h-5 w-5" />
-            <a
-              href={site.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 pt-1 text-[#25D366]"
-              aria-label="WhatsApp"
-            >
-              <WhatsAppIcon className="h-5 w-5" />
-              <span className="text-cream/80">{site.phone}</span>
-            </a>
           </nav>
         </div>
       ) : null}

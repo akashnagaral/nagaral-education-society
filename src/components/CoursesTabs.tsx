@@ -177,7 +177,7 @@ export function CoursesTabs() {
                       {program.name}
                     </p>
                     <p className="mt-1 text-xs text-muted">{program.fullName}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-cream/80">
+                    <p className="mt-4 text-sm leading-relaxed text-cream">
                       {program.summary}
                     </p>
                   </article>
