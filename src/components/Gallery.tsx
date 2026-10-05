@@ -28,9 +28,9 @@ export function Gallery() {
                   className="object-cover transition duration-700 group-hover:scale-[1.02]"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-hero-scrim/85 via-transparent to-transparent" />
               </div>
-              <figcaption className="absolute bottom-4 left-4 text-sm text-cream">
+              <figcaption className="absolute bottom-4 left-4 text-sm text-hero-fg">
                 {item.caption}
               </figcaption>
             </figure>
