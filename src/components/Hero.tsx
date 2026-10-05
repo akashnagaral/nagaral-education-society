@@ -35,7 +35,7 @@ export function Hero() {
                 alt={`${site.name} logo — PU Science colleges in Dharwad`}
                 width={96}
                 height={96}
-                className="logo-glow animate-rise h-16 w-16 object-contain opacity-70 sm:h-20 sm:w-20"
+                className="nes-logo logo-glow animate-rise h-16 w-16 object-contain sm:h-20 sm:w-20"
                 priority
               />
               <div className="animate-rise-delay-1 mt-3 flex flex-wrap items-center gap-2 sm:mt-4 sm:gap-3">
@@ -92,18 +92,18 @@ export function Hero() {
                 >
                   <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </a>
-                <Link
-                  href="/#courses"
+                <a
+                  href="#courses"
                   className="bg-gold px-4 py-2.5 text-xs font-semibold text-on-gold transition hover:bg-gold-bright sm:px-5 sm:py-3 sm:text-sm"
                 >
                   PUC Science courses
-                </Link>
-                <Link
-                  href="/#coaching"
+                </a>
+                <a
+                  href="#coaching"
                   className="border border-hero-fg/35 px-4 py-2.5 text-xs font-medium text-hero-fg transition hover:border-gold hover:text-gold sm:px-5 sm:py-3 sm:text-sm"
                 >
                   View coaching
-                </Link>
+                </a>
               </div>
             </div>
           </div>

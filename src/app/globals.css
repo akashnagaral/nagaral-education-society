@@ -2,25 +2,26 @@
 
 :root {
   /* Light default — ink/cream act as surface/foreground */
-  --ink: #f7f3ea;
-  --ink-soft: #efe9dc;
-  --gold: #c9a227;
-  --gold-bright: #d4b03a;
-  --gold-deep: #9a7a1a;
-  --cream: #16120c;
-  --muted: #6b6560;
-  --line: rgba(184, 137, 31, 0.32);
+  --ink: #faf7f0;
+  --ink-soft: #f1ebe0;
+  --gold: #b8891f;
+  --gold-bright: #c9a027;
+  --gold-deep: #8a6a12;
+  --cream: #1a1510;
+  --muted: #5c564f;
+  --line: rgba(184, 137, 31, 0.35);
   --on-gold: #0a0a0a;
   --hero-fg: #f7f1e3;
-  --hero-fg-muted: rgba(247, 241, 227, 0.8);
+  --hero-fg-muted: rgba(247, 241, 227, 0.85);
   --hero-scrim: #0a0a0a;
   --background: var(--ink);
   --foreground: var(--cream);
-  --atmosphere-1: rgba(201, 162, 39, 0.14);
-  --atmosphere-2: rgba(154, 122, 26, 0.08);
-  --atmosphere-base-from: #f7f3ea;
-  --atmosphere-base-mid: #f0ebe0;
-  --atmosphere-base-to: #f7f3ea;
+  --atmosphere-1: rgba(184, 137, 31, 0.12);
+  --atmosphere-2: rgba(138, 106, 18, 0.07);
+  --atmosphere-base-from: #faf7f0;
+  --atmosphere-base-mid: #f3eee4;
+  --atmosphere-base-to: #faf7f0;
+  --logo-opacity: 1;
 }
 
 html.dark {
@@ -43,6 +44,7 @@ html.dark {
   --atmosphere-base-from: #0a0a0a;
   --atmosphere-base-mid: #111111;
   --atmosphere-base-to: #0a0a0a;
+  --logo-opacity: 0.85;
 }
 
 @theme inline {
@@ -161,6 +163,11 @@ a {
 
 .logo-glow {
   animation: soft-glow 4s ease-in-out infinite;
+}
+
+.nes-logo {
+  opacity: var(--logo-opacity);
+  background: #0a0a0a;
 }
 
 @keyframes admissions-blink {

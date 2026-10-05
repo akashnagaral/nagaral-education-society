@@ -45,7 +45,7 @@ export function StickyContact() {
             alt=""
             width={36}
             height={36}
-            className="mt-0.5 h-9 w-9 shrink-0 object-contain opacity-70"
+            className="nes-logo mt-0.5 h-9 w-9 shrink-0 object-contain"
           />
           <div>
             <p className="admissions-blink inline-block rounded-sm bg-gold px-2 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-on-gold">

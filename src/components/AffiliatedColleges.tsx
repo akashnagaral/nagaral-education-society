@@ -30,7 +30,7 @@ export function AffiliatedColleges() {
                     className="object-cover transition duration-700 group-hover:scale-[1.03]"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-hero-scrim/90 via-hero-scrim/25 to-transparent" />
                   <p className="absolute bottom-4 left-4 text-xs uppercase tracking-[0.18em] text-gold">
                     Collaboration since {college.collaboratedSince}
                   </p>

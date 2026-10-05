@@ -36,7 +36,7 @@ export function Leadership() {
               {guide.credentials}
             </p>
 
-            <figure className="mt-6 max-w-lg border border-line bg-ink">
+            <figure className="mt-6 max-w-lg border border-line bg-hero-scrim">
               <Image
                 src={guide.photo}
                 alt={`${guide.name}, ${guide.role}`}
@@ -112,7 +112,7 @@ export function Leadership() {
           </div>
 
           <div className="lg:order-2 lg:justify-self-end">
-            <figure className="max-w-lg border border-line bg-ink lg:ml-auto">
+            <figure className="max-w-lg border border-line bg-hero-scrim lg:ml-auto">
               <Image
                 src={founder.photo}
                 alt={`${founder.name}, ${founder.role}`}

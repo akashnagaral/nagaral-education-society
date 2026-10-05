@@ -15,7 +15,7 @@ export function Footer() {
               alt=""
               width={44}
               height={44}
-              className="h-11 w-11 object-contain opacity-80"
+              className="nes-logo h-11 w-11 object-contain"
             />
             <p className="font-[family-name:var(--font-display)] text-xl text-cream">
               {site.name}

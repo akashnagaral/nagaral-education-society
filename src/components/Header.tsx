@@ -34,7 +34,7 @@ export function Header() {
             alt={`${site.name} logo`}
             width={40}
             height={40}
-            className="h-9 w-9 object-contain sm:h-10 sm:w-10"
+            className="nes-logo h-9 w-9 object-contain sm:h-10 sm:w-10"
             priority
           />
         </Link>

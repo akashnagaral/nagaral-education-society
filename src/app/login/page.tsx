@@ -66,7 +66,7 @@ export default function LoginPage() {
             alt=""
             width={44}
             height={44}
-            className="h-11 w-11 object-contain"
+            className="nes-logo h-11 w-11 object-contain"
           />
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-gold">Portal login</p>

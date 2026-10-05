@@ -113,13 +113,13 @@ export function AboutSection() {
                   className="object-cover transition duration-500 group-hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-hero-scrim/90 via-hero-scrim/30 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3">
                   <p className="text-xs uppercase tracking-[0.16em] text-gold">
                     {college.shortName}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-cream">{college.name}</p>
-                  <p className="mt-0.5 text-[11px] text-cream/65">{college.location}</p>
+                  <p className="mt-1 text-sm font-medium text-hero-fg">{college.name}</p>
+                  <p className="mt-0.5 text-[11px] text-hero-fg-muted">{college.location}</p>
                 </div>
               </div>
             </Link>

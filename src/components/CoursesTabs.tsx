@@ -18,32 +18,62 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
+function tabFromHash(): TabId | null {
+  if (typeof window === "undefined") return null;
+  const hash = window.location.hash.replace(/^#/, "");
+  if (hash === "coaching") return "coaching";
+  if (hash === "courses") return "courses";
+  return null;
+}
+
 export function CoursesTabs() {
   const [active, setActive] = useState<TabId>("courses");
 
   useEffect(() => {
-    const openFromHash = () => {
-      if (window.location.hash === "#coaching") {
-        setActive("coaching");
+    const applyHash = () => {
+      const tab = tabFromHash();
+      if (tab) setActive(tab);
+    };
+
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+
+    // Next.js <Link href="/#coaching"> often skips hashchange on the same page
+    const onClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest("a[href]");
+      if (!(anchor instanceof HTMLAnchorElement)) return;
+      const href = anchor.getAttribute("href") || "";
+      if (href === "#coaching" || href.endsWith("/#coaching")) {
+        window.setTimeout(() => setActive("coaching"), 0);
+      }
+      if (href === "#courses" || href.endsWith("/#courses")) {
+        window.setTimeout(() => setActive("courses"), 0);
       }
     };
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-    return () => window.removeEventListener("hashchange", openFromHash);
+    document.addEventListener("click", onClick);
+
+    return () => {
+      window.removeEventListener("hashchange", applyHash);
+      document.removeEventListener("click", onClick);
+    };
   }, []);
 
   function selectTab(id: TabId) {
     setActive(id);
     if (id === "coaching") {
       window.history.replaceState(null, "", "#coaching");
-    } else if (window.location.hash === "#coaching") {
+    } else if (id === "courses") {
       window.history.replaceState(null, "", "#courses");
+    } else if (window.location.hash === "#coaching" || window.location.hash === "#courses") {
+      window.history.replaceState(null, "", window.location.pathname);
     }
   }
 
   return (
     <section id="courses" className="section-pad section-y scroll-mt-24">
-      <div id="coaching" className="mx-auto max-w-6xl scroll-mt-24">
+      <div className="mx-auto max-w-6xl">
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-gold">
           What we offer
         </p>
@@ -56,9 +86,15 @@ export function CoursesTabs() {
         </p>
 
         <div
+          id="coaching"
+          className="mt-8 scroll-mt-28"
+          aria-hidden={active !== "coaching"}
+        />
+
+        <div
           role="tablist"
           aria-label="Courses and coaching"
-          className="mt-8 flex flex-wrap gap-2 border-b border-line pb-px"
+          className="flex flex-wrap gap-2 border-b border-line pb-px"
         >
           {tabs.map((tab) => (
             <button
@@ -78,7 +114,7 @@ export function CoursesTabs() {
           ))}
         </div>
 
-        <div className="mt-8" role="tabpanel">
+        <div className="mt-8">
           {active === "courses" ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {courses.map((course) => (

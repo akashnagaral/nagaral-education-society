@@ -130,12 +130,12 @@ export function AchievementsSection({
                       key={topper.id}
                       className="overflow-hidden border border-line bg-ink-soft/50 text-center"
                     >
-                      <div className="border-b border-line bg-ink px-4 py-3">
+                      <div className="border-b border-line bg-hero-scrim px-4 py-3">
                         <p className="text-xs uppercase tracking-[0.18em] text-gold">
                           {topper.rank}
                         </p>
                       </div>
-                      <div className="relative mx-auto mt-6 h-40 w-40 overflow-hidden border border-line bg-ink">
+                      <div className="relative mx-auto mt-6 h-40 w-40 overflow-hidden border border-line bg-hero-scrim">
                         <Image
                           src={topper.photo}
                           alt={topper.name}
@@ -186,7 +186,7 @@ export function AchievementsSection({
                       className="overflow-hidden border border-line bg-ink-soft/50"
                     >
                       {story.photo ? (
-                        <div className="relative mx-auto mt-6 h-40 w-40 overflow-hidden border border-line bg-ink">
+                        <div className="relative mx-auto mt-6 h-40 w-40 overflow-hidden border border-line bg-hero-scrim">
                           <Image
                             src={story.photo}
                             alt={story.name}
