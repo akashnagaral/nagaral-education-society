@@ -71,6 +71,9 @@ export function CoursesTabs() {
     }
   }
 
+  const puCourses = courses.filter((c) => c.id === "puc1" || c.id === "puc2");
+  const otherCourses = courses.filter((c) => c.id !== "puc1" && c.id !== "puc2");
+
   return (
     <section id="courses" className="section-pad section-y scroll-mt-24">
       <div className="mx-auto max-w-6xl">
@@ -96,60 +99,115 @@ export function CoursesTabs() {
           aria-label="Courses and coaching"
           className="flex flex-wrap gap-2 border-b border-line pb-px"
         >
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              type="button"
-              role="tab"
-              aria-selected={active === tab.id}
-              onClick={() => selectTab(tab.id)}
-              className={`px-4 py-2.5 text-sm transition ${
-                active === tab.id
-                  ? "border-b-2 border-gold text-gold"
-                  : "text-cream/70 hover:text-cream"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+          {tabs.map((tab) => {
+            const selected = active === tab.id;
+            const primary = tab.id === "courses";
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => selectTab(tab.id)}
+                className={`px-4 py-2.5 text-sm transition ${
+                  selected
+                    ? primary
+                      ? "border-b-2 border-gold bg-gold/10 font-semibold text-gold"
+                      : "border-b-2 border-gold text-gold"
+                    : primary
+                      ? "font-medium text-cream hover:text-gold"
+                      : "text-cream/70 hover:text-cream"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
 
         <div className="mt-8">
           {active === "courses" ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {courses.map((course) => (
+            <div className="space-y-8">
+              <div className="border border-gold/40 bg-gradient-to-br from-gold/12 via-ink-soft/50 to-transparent px-5 py-6 sm:px-7 sm:py-7">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
+                  Core programme
+                </p>
+                <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl text-cream sm:text-3xl">
+                  PU Science — PCMB & PCMCS
+                </h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-cream sm:text-base">
+                  Two-year PU Science at NTSS Dharwad and NES Alnavar. Limited
+                  batches, lab-based learning, and coaching woven into the
+                  timetable — not an add-on.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <span className="border border-gold/50 bg-gold/15 px-3 py-1.5 text-sm font-semibold tracking-wide text-gold">
+                    PCMB
+                  </span>
+                  <span className="border border-gold/50 bg-gold/15 px-3 py-1.5 text-sm font-semibold tracking-wide text-gold">
+                    PCMCS
+                  </span>
+                  <span className="border border-line px-3 py-1.5 text-sm text-cream/85">
+                    Physics · Chemistry · Maths · Biology / CS
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid gap-5 lg:grid-cols-2">
+                {puCourses.map((course) => (
+                  <article
+                    key={course.id}
+                    className="border border-gold/30 bg-ink-soft/55 px-5 py-6 sm:px-6 sm:py-7"
+                  >
+                    <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-gold">
+                      {course.id === "puc1" ? "Year 1" : "Year 2"}
+                    </p>
+                    <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl text-cream">
+                      {course.name}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-cream sm:text-[15px]">
+                      {course.detail}
+                    </p>
+                    {"branches" in course && course.branches ? (
+                      <div className="mt-5 space-y-3 border-t border-line pt-5">
+                        <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-gold">
+                          Subject combinations
+                        </p>
+                        {course.branches.map((branch) => (
+                          <div
+                            key={branch.code}
+                            className="flex flex-col gap-1 border-l-2 border-gold/60 pl-3 sm:flex-row sm:items-baseline sm:gap-3"
+                          >
+                            <span className="shrink-0 font-[family-name:var(--font-display)] text-lg text-gold">
+                              {branch.code}
+                            </span>
+                            <span className="text-sm text-cream/90">
+                              {branch.subjects}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    ) : null}
+                  </article>
+                ))}
+              </div>
+
+              {otherCourses.map((course) => (
                 <article
                   key={course.id}
-                  className="border border-line bg-ink-soft/40 px-5 py-6"
+                  className="border border-line bg-ink-soft/30 px-5 py-5 sm:px-6"
                 >
                   <h3 className="font-[family-name:var(--font-display)] text-xl text-cream">
                     {course.name}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-cream/75">
+                  <p className="mt-2 text-sm leading-relaxed text-cream/85">
                     {course.detail}
                   </p>
-                  {"branches" in course && course.branches ? (
-                    <div className="mt-4 border-t border-line pt-4">
-                      <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-gold">
-                        Subject combinations
-                      </p>
-                      <ul className="mt-3 space-y-2">
-                        {course.branches.map((branch) => (
-                          <li key={branch.code} className="text-sm text-cream/80">
-                            <span className="font-medium text-cream">
-                              {branch.code}
-                            </span>
-                            <span className="text-muted"> — {branch.subjects}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
                   {"points" in course && course.points ? (
-                    <ul className="mt-4 space-y-2 border-t border-line pt-4">
+                    <ul className="mt-4 grid gap-2 sm:grid-cols-2">
                       {course.points.map((point) => (
-                        <li key={point} className="flex gap-2 text-sm text-cream/80">
-                          <span className="mt-2 h-1 w-1 shrink-0 bg-gold" />
+                        <li key={point} className="flex gap-2 text-sm text-cream/85">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-gold" />
                           {point}
                         </li>
                       ))}

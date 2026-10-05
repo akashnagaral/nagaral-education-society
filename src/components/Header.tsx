@@ -15,8 +15,8 @@ const links = [
   { href: "/#achievements", label: "Achievements", hash: "achievements" },
   { href: "/#leadership", label: "Leadership", hash: "leadership" },
   { href: "/careers", label: "Careers", hash: null },
-  { href: "/#faq", label: "FAQ", hash: "faq" },
   { href: "/#contact", label: "Contact", hash: "contact" },
+  { href: "/#faq", label: "FAQ", hash: "faq" },
   { href: "/login", label: "Portal", hash: null },
 ];
 

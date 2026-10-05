@@ -128,8 +128,8 @@ export function HomeView() {
       {section === "colleges" ? <AffiliatedColleges /> : null}
       {section === "achievements" ? <AchievementsSection /> : null}
       {section === "leadership" ? <Leadership /> : null}
-      {section === "faq" ? <FaqSection /> : null}
       {section === "contact" ? <Contact /> : null}
+      {section === "faq" ? <FaqSection /> : null}
     </div>
   );
 }
