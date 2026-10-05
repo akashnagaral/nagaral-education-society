@@ -55,7 +55,7 @@ export const site = {
   timings: {
     weekdays: "Mon – Sat: 9:00 AM – 5:30 PM",
     sunday: "Sunday: Closed (admissions by appointment)",
-    note: "Separate hostels for boys & girls with hygienic nutritious food (residential & day-scholar options). Structured SSLC vacation classes help Class 10 students prepare for PUC Science.",
+    note: "Campus visits welcome during office hours — call or WhatsApp to schedule.",
   },
   social: {
     youtube: "https://www.youtube.com/@NagaralEducationSociety",
@@ -103,68 +103,63 @@ export const site = {
     ],
   },
   about: [
-    "Welcome to Nagaral Education Society® — a destination in Dharwad where personal development and academic achievement meet. Founded in 2024 and inspired by Dr. H. S. Nagaral, we help students build strong foundations through focused PU Science programmes, integrated competitive coaching, and financial support.",
-    "In our first academic pass-out year, the 2025–2026 batch achieved 100% results in PU-II — every student passed. This milestone reflects dedicated teaching, limited batch strength, close mentoring, and evening doubt-clearing in study rooms.",
-    "Our faculties are highly experienced educators. Many bring advanced academic backgrounds — including IIT and NIT degrees and PhD qualifications — so students learn from teachers who combine subject depth with classroom experience.",
-    "The society’s guidance team includes doctors, engineers, and professional mentors, along with IAS and KAS officers who advise on academics, careers, and long-term student development.",
-    "We provide merit-based scholarships, need-based grants, and work-study programmes so deserving students can access quality education without barriers. Separate hostel facilities for boys and girls are available with hygienic nutritious food — residential and day-scholar options. We also run structured SSLC vacation classes to strengthen foundations before PUC.",
+    "Welcome to Nagaral Education Society® — founded in 2024 in Dharwad and inspired by Dr. H. S. Nagaral. We help students build strong foundations through focused PU Science, integrated competitive coaching, and financial support.",
+    "In our first academic pass-out year, the 2025–2026 batch achieved 100% results in PU-II — every student passed. This reflects dedicated teaching, limited batch strength, and close mentoring.",
+    "Merit-based scholarships, need-based grants, and work-study programmes help deserving students access quality education. SSLC vacation classes are also offered to strengthen foundations before PUC.",
   ],
   faculty: {
     title: "Experienced faculty",
-    text: "Nagaral Education Society® brings together seasoned teachers for board and entrance preparation. Our faculty team includes educators with IIT and NIT backgrounds and PhD holders with strong teaching experience — focused on clarity, practice, and personal attention.",
+    text: "Seasoned educators for board and entrance preparation — combining subject depth with classroom experience.",
     points: [
-      "All experienced teaching faculty",
-      "Educators with IIT / NIT degrees",
-      "PhD holders with subject expertise",
+      "Teachers with IIT / NIT backgrounds",
+      "PhD holders with strong subject expertise",
       "Specialists for NEET · JEE · CET · NDA pathways",
+      "Personal attention in limited-strength batches",
     ],
   },
   guidanceTeam: {
     title: "Society guidance team",
-    text: "Beyond classroom teaching, students and parents benefit from a guidance circle of professionals who shape our academic vision and career direction.",
+    text: "A professional circle that shapes academic vision and career direction beyond the classroom.",
     points: [
       "Doctors and healthcare professionals",
       "Engineers from diverse fields",
       "IAS and KAS officers",
-      "Career and academic mentoring support",
+      "Career mentoring support",
     ],
   },
   hostel: {
     title: "Separate hostels & hygienic food",
-    text: "Safe, separate hostel facilities for boys and girls, with hygienic nutritious meals — so students stay focused on studies in a disciplined residential environment. Day scholars can also opt for hygienic food on campus.",
+    text: "A disciplined residential setup so students can focus on studies — with day-scholar options too.",
     points: [
-      "Separate hostel facilities for boys and girls",
-      "Safe, supervised residential campus environment",
-      "Hygienic and nutritious food every day",
-      "Residential and non-residential (day scholar) options",
-      "Calm study routine suited for board & entrance prep",
-      "Ask the admission office for hostel seat availability",
+      "Separate boys’ and girls’ hostels",
+      "Hygienic, nutritious meals daily",
+      "Supervised campus living",
+      "Day-scholar food option where available",
+      "Ask admissions for seat availability",
     ],
   },
   eveningMentoring: {
     title: "Evening doubt-clearing with teachers",
-    text: "We are education-oriented — learning does not stop at classroom hours. Every evening, teachers come to the study rooms and stay with students on a subject-wise rotation, clearing doubts personally so no learner is left behind.",
+    text: "Learning continues after class — teachers stay with students in study rooms until doubts are cleared.",
     points: [
-      "Teachers visit study rooms every evening",
-      "Subject-wise rotation — Physics, Chemistry, Maths, Biology / CS",
-      "One-to-one and small-group doubt clearing",
-      "Board + entrance concepts reinforced daily",
-      "Discipline and focus in a supervised study environment",
+      "Daily evening study-room visits",
+      "Subject-wise rotation (PCM · Bio / CS)",
+      "One-to-one and small-group help",
+      "Board and entrance concepts reinforced",
     ],
   },
   sslcVacation: {
     title: "SSLC vacation classes",
     summary:
-      "Bridge the gap between SSLC and PUC Science with focused vacation coaching at Nagaral Education Society®.",
+      "Bridge the gap between SSLC and PUC Science with focused vacation coaching.",
     detail:
-      "Our SSLC vacation classes help Class 10 students revise core concepts, build PU-ready study habits, and get an early start on Science foundations — so they enter PUC I with confidence. Sessions are designed for concept clarity, regular practice, and personal mentoring in a limited-batch setting.",
+      "Class 10 students revise foundations, build PU-ready habits, and start Science with confidence before PUC I.",
     points: [
-      "Strong revision of SSLC Science & Mathematics foundations",
-      "Early exposure to PUC Science thinking and study methods",
-      "Practice-oriented sessions with experienced faculty",
-      "Guidance for choosing PU Science combinations (PCMB / PCMCS)",
-      "Supportive step toward NEET / CET / JEE readiness later",
-      "Enquire on WhatsApp or at the admission office for batch timings",
+      "SSLC Science & Maths revision",
+      "PUC readiness and study discipline",
+      "Limited batches · experienced faculty",
+      "Guidance on PCMB / PCMCS choices",
+      "Ask the office for batch timings",
     ],
   },
   milestone: {
@@ -274,17 +269,11 @@ export const scholarships = [
 
 export const facilities = [
   "Modern science laboratories — Physics, Chemistry, Biology & Computer Science",
-  "Focused classrooms with limited student strength for personal attention",
-  "Evening teacher visits to study rooms — subject-wise doubt clearing every day",
-  "Separate hostel facilities for boys and girls with hygienic nutritious food",
-  "Tennis court / tennis ground facility",
-  "Cricket and football supported grounds",
-  "Sports and fitness for balanced student life",
-  "Experienced faculty — including IIT / NIT backgrounds and PhD holders",
-  "Guidance team of doctors, engineers, and IAS / KAS officers",
+  "Focused classrooms with limited student strength",
+  "Tennis · cricket · football grounds",
+  "Library and quiet study spaces",
   "Career guidance with Vision Career Studio (Bengaluru)",
-  "Library / quiet study spaces for board & entrance preparation",
-  "Day-scholar option with hygienic campus food where available",
+  "SSLC vacation classes for Class 10 foundation",
 ];
 
 export const successStories: {
@@ -335,20 +324,16 @@ export const faqs = [
     a: "Our society guidance team includes doctors, engineers, and other professionals, as well as IAS and KAS officers who advise on academics, careers, and student development.",
   },
   {
-    q: "Is hostel available?",
-    a: "Yes. Nagaral Education Society® provides separate hostel facilities for boys and girls, with a safe supervised environment and hygienic nutritious food. Both residential and non-residential (day scholar) options are available — ask the admission office for current hostel seat availability.",
-  },
-  {
-    q: "Is hygienic food provided?",
-    a: "Yes. Hygienic and nutritious meals are provided for hostel students. Day scholars can also avail hygienic food options on campus where available.",
+    q: "Is hostel and food available?",
+    a: "Yes — separate boys’ and girls’ hostels with hygienic nutritious meals. Day-scholar options are available too. Ask admissions for current seats.",
   },
   {
     q: "Do teachers help after class hours?",
-    a: "Yes. Every evening, teachers come to the study rooms and stay with students on a subject-wise basis to clear doubts — so learning continues beyond the classroom in a supervised, education-focused environment.",
+    a: "Yes. Teachers visit study rooms every evening on a subject-wise rotation and clear doubts with students.",
   },
   {
     q: "What sports facilities are available?",
-    a: "Campuses support tennis, cricket, and football grounds along with other sports activities — balancing academics with physical fitness.",
+    a: "Tennis, cricket, and football grounds — balancing academics with fitness.",
   },
   {
     q: "Do you provide scholarships?",
@@ -360,7 +345,7 @@ export const faqs = [
   },
   {
     q: "Do I need to log in to see results or notes?",
-    a: "No. Results and study notes are published as public download links. Student login is not required for the website.",
+    a: "Public website content needs no login. Temporary notes and announcements for students/staff are shared through the college Portal login.",
   },
   {
     q: "What are your board results?",
@@ -382,7 +367,7 @@ export const colleges: College[] = [
     collegeCode: "JJ0346",
     collaboratedSince: "2024",
     slug: "/colleges/ntss-dharwad",
-    image: "/images/ntss-dharwad-campus.png",
+    image: "/images/ntss-campus.png",
     mapUrl: "https://share.google/bJwhZHkuqQVTouDdY",
     mapEmbedUrl:
       "https://maps.google.com/maps?q=NTSS+PU+College+Sarovar+Nagar+Kelageri+Dharwad&output=embed",
@@ -396,11 +381,8 @@ export const colleges: College[] = [
       "NES collaboration since 2024",
       "PUC I & II Science · PCMB / PCMCS",
       "NEET | JEE | K-CET | NDA coaching",
-      "Modern science laboratories",
-      "Evening teacher doubt-clearing in study rooms",
-      "Separate hostels · hygienic food",
-      "Tennis · cricket · football grounds",
-      "Limited student strength",
+      "Labs · sports grounds · hostels",
+      "Evening doubt clearing in study rooms",
       "Experienced faculty — IIT / NIT / PhD",
     ],
   },
@@ -424,15 +406,11 @@ export const colleges: College[] = [
     ],
     focus: [
       "100% II PU board results — 2025–2026",
-      "NES collaboration since 2024",
-      "College code MM0013",
+      "NES collaboration since 2024 · code MM0013",
       "Focused PU Science · modern laboratories",
-      "Evening teacher doubt-clearing in study rooms",
-      "Separate hostels · hygienic food",
-      "Tennis · cricket · football grounds",
-      "Scholarship support",
-      "Experienced faculty — IIT / NIT / PhD",
-      "Dedicated study guidance",
+      "Evening doubt clearing in study rooms",
+      "Hostels · hygienic food · sports grounds",
+      "Scholarships · experienced faculty",
     ],
   },
 ];
@@ -488,7 +466,7 @@ export const boardToppers2025 = [
 export const galleryItems = [
   {
     id: "g1",
-    src: "/images/ntss-dharwad-campus.png",
+    src: "/images/ntss-campus.png",
     alt: "NTSS PU College campus, Dharwad",
     caption: "Campus — NTSS Dharwad",
   },

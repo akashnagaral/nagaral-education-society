@@ -176,9 +176,8 @@ export function CoursesTabs() {
           {active === "campus" ? (
             <div className="space-y-6">
               <p className="max-w-2xl text-sm leading-relaxed text-muted">
-                Education-oriented campuses in Dharwad and Alnavar — science
-                labs, sports grounds, separate hostels with hygienic food, and
-                evening teacher support in study rooms.
+                Education-oriented campuses in Dharwad and Alnavar — labs,
+                sports, hostels, and evening mentoring under one roof.
               </p>
               <div className="grid gap-4 lg:grid-cols-2">
                 <div className="border border-gold/35 bg-ink-soft/40 px-5 py-6">
@@ -214,21 +213,23 @@ export function CoursesTabs() {
                   </ul>
                 </div>
               </div>
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {facilities.map((item) => (
-                  <li
-                    key={item}
-                    className="flex gap-3 border border-line/80 px-4 py-3 text-sm text-cream/80"
-                  >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-gold" />
-                    {item}
-                  </li>
-                ))}
-                <li className="flex gap-3 border border-line/80 px-4 py-3 text-sm text-cream/80 sm:col-span-2">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-gold" />
-                  {site.timings.note}
-                </li>
-              </ul>
+              <div>
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-gold">
+                  More campus facilities
+                </p>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {facilities.map((item) => (
+                    <li
+                      key={item}
+                      className="flex gap-3 border border-line/80 px-4 py-3 text-sm text-cream/80"
+                    >
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-gold" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 text-xs text-muted">{site.timings.note}</p>
+              </div>
             </div>
           ) : null}
         </div>
