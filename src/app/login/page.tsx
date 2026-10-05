@@ -11,11 +11,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fallbackUrl, setFallbackUrl] = useState("");
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     setInfo("");
+    setFallbackUrl("");
     setLoading(true);
     try {
       const res = await fetch("/api/portal/login", {
@@ -38,18 +40,15 @@ export default function LoginPage() {
       if (data.openExternal) {
         const opened = window.open(data.openExternal, "_blank", "noopener,noreferrer");
         if (!opened) {
-          setInfo(
-            "Popup blocked — use the button below to open Accounts, then continue on this site.",
-          );
+          setFallbackUrl(data.openExternal || CEO_REDIRECT_URL);
+          setInfo("Popup blocked — allow popups, or use the link below.");
           setLoading(false);
           return;
         }
-        // Stay on NES website (home), accounts stays in other tab
         window.location.assign("/");
         return;
       }
 
-      // Full page load so session cookie is always sent to /portal
       window.location.assign(data.redirect || "/portal");
     } catch {
       setError("Something went wrong. Try again.");
@@ -81,7 +80,7 @@ export default function LoginPage() {
             <label className="text-xs uppercase tracking-[0.14em] text-muted" htmlFor="username">
               Email
             </label>
-              <input
+            <input
               id="username"
               name="username"
               type="email"
@@ -119,21 +118,18 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {info.includes("Popup blocked") ? (
+        {fallbackUrl ? (
           <a
-            href={CEO_REDIRECT_URL}
+            href={fallbackUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 flex w-full items-center justify-center border border-gold px-4 py-3 text-sm text-gold hover:bg-ink"
           >
-            Open Accounts app in new tab
+            Continue
           </a>
         ) : null}
 
-        <p className="mt-6 text-xs leading-relaxed text-muted">
-          CEO opens accounts in a new tab. Others enter the document portal.
-        </p>
-        <Link href="/" className="mt-4 inline-block text-sm text-gold hover:underline">
+        <Link href="/" className="mt-6 inline-block text-sm text-gold hover:underline">
           ← Back to website
         </Link>
       </div>
