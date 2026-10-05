@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Sora } from "next/font/google";
+import { Chatbot } from "@/components/Chatbot";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { StickyContact } from "@/components/StickyContact";
@@ -118,6 +119,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyContact />
+        <Chatbot />
       </body>
     </html>
   );
