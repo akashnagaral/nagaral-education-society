@@ -25,13 +25,13 @@ const siteUrl = "https://nagaral.in";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Best PU Science College in Dharwad | Nagaral Education Society®️",
+    default: "Nagaral Education Society® | PU Science · Dharwad",
     template: "%s | Nagaral Education Society",
   },
   description:
     "Looking for the best PU college / best PU Science college in Dharwad? Nagaral Education Society® collaborates with NTSS PU College, Dharwad and NES PU Science College, Alnavar — PUC Science, NEET, CET, JEE & NDA coaching. 100% II PU results 2025–2026. Admissions open.",
   keywords: [
+    "Nagaral Education Society",
     "best PU college in Dharwad",
     "best PU Science college Dharwad",
     "best college in Dharwad",
@@ -40,7 +40,6 @@ export const metadata: Metadata = {
     "NES PU Science College Alnavar",
     "NEET coaching Dharwad",
     "JEE CET NDA coaching Dharwad",
-    "Nagaral Education Society",
   ],
   alternates: {
     canonical: "/",
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: site.name,
-    title: "Best PU Science College in Dharwad | Nagaral Education Society®️",
+    title: "Nagaral Education Society® | PU Science Colleges in Dharwad",
     description:
       "Focused PU Science in Dharwad with NTSS & NES Alnavar — 100% II PU board results, NEET · CET · JEE · NDA coaching. Admissions open.",
     images: [
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best PU Science College in Dharwad | Nagaral Education Society®️",
+    title: "Nagaral Education Society® | PU Science Colleges in Dharwad",
     description:
       "NTSS Dharwad & NES Alnavar — PUC Science with NEET, CET, JEE & NDA coaching. Admissions open.",
     images: ["/images/hero-students.png"],

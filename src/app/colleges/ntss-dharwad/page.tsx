@@ -4,7 +4,7 @@ import { CollegePage } from "@/components/CollegePage";
 import { colleges } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "NTSS PU College Dharwad | Best PU Science College Collaboration",
+  title: "NTSS PU College, Dharwad",
   description:
     "NTSS PU College, Dharwad — one of Dharwad’s focused PU Science colleges in collaboration with Nagaral Education Society®. PUC Science, NEET, JEE, CET & NDA coaching. Admissions open.",
   alternates: { canonical: "/colleges/ntss-dharwad" },

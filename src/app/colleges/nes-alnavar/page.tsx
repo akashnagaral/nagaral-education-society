@@ -4,7 +4,7 @@ import { CollegePage } from "@/components/CollegePage";
 import { colleges } from "@/lib/site-data";
 
 export const metadata: Metadata = {
-  title: "NES PU Science College Alnavar | Best PU Science in Dharwad Region",
+  title: "NES PU Science College, Alnavar",
   description:
     "NES PU Science College, Alnavar — focused PU Science college near Dharwad in collaboration with Nagaral Education Society®. Scholarships, labs, 100% II PU results. Admissions open.",
   alternates: { canonical: "/colleges/nes-alnavar" },
