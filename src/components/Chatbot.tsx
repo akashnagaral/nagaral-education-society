@@ -32,7 +32,7 @@ export function Chatbot() {
     {
       id: "welcome",
       role: "bot",
-      text: `Welcome to ${site.name}®. Ask about courses, hostels, results, or admissions. Sharing a mobile for a callback is optional.`,
+      text: `Welcome to ${site.name}®. Ask about courses, hostels, results, or admissions.`,
     },
   ]);
   const [suggestions, setSuggestions] = useState(chatSuggestions);
@@ -161,165 +161,166 @@ export function Chatbot() {
   });
 
   return (
-    <div className="fixed bottom-5 left-5 z-[60] flex w-80 max-w-[calc(100vw-2.5rem)] flex-col items-stretch gap-2">
+    <div className="fixed bottom-5 left-5 z-[60] flex flex-col items-start gap-2">
       {open ? (
         <div
-          className="flex max-h-[min(22rem,55vh)] w-full flex-col overflow-hidden border border-line bg-ink/95 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md"
+          className="flex h-80 max-w-[calc(100vw-2.5rem)] overflow-hidden border border-line bg-ink/95 shadow-[0_12px_40px_rgba(0,0,0,0.45)] backdrop-blur-md"
           role="dialog"
           aria-label="Nagaral Education Society assistant"
         >
-          <div className="flex items-start justify-between gap-2 border-b border-line px-3 py-2.5">
-            <div className="min-w-0">
-              <p className="text-xs font-medium leading-snug text-cream sm:text-sm">
+          <div className="flex w-72 max-w-full min-w-0 flex-col">
+            <div className="flex items-start justify-between gap-2 border-b border-line px-3 py-2.5">
+              <p className="min-w-0 text-sm font-medium leading-snug text-cream">
                 Nagaral Education Society&apos;s assistant
               </p>
-              <p className="mt-0.5 text-[9px] uppercase tracking-[0.12em] text-muted">
-                Basic answers · WhatsApp for more
-              </p>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="shrink-0 px-1 text-base leading-none text-muted hover:text-cream"
+                aria-label="Close chat"
+              >
+                ×
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="shrink-0 px-1 text-base leading-none text-muted hover:text-cream"
-              aria-label="Close chat"
-            >
-              ×
-            </button>
+
+            {phone ? (
+              <p className="border-b border-line px-3 py-1 text-[10px] text-muted">
+                Callback: {phone}{" "}
+                <button
+                  type="button"
+                  className="text-gold hover:underline"
+                  onClick={() => {
+                    setPhone("");
+                    setPhoneDismissed(false);
+                    setPhoneDraft("");
+                    try {
+                      localStorage.removeItem(PHONE_KEY);
+                    } catch {
+                      /* ignore */
+                    }
+                  }}
+                >
+                  clear
+                </button>
+              </p>
+            ) : null}
+
+            <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-2.5">
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`max-w-[92%] ${msg.role === "user" ? "ml-auto" : ""}`}
+                >
+                  <div
+                    className={`rounded-sm px-2.5 py-1.5 text-xs leading-relaxed sm:text-sm ${
+                      msg.role === "user"
+                        ? "bg-gold text-on-gold"
+                        : "bg-ink-soft text-cream/90"
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                  {msg.handoff ? (
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-flex items-center rounded-sm bg-[#25D366] px-2.5 py-1 text-[10px] font-semibold text-on-gold hover:brightness-110"
+                    >
+                      Continue on WhatsApp
+                    </a>
+                  ) : null}
+                </div>
+              ))}
+              <div ref={bottomRef} />
+            </div>
+
+            <div className="flex flex-wrap gap-1 border-t border-line px-2.5 py-1.5">
+              {suggestions.slice(0, 3).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => ask(s)}
+                  className="border border-line px-1.5 py-0.5 text-[9px] text-cream/75 hover:border-gold hover:text-gold"
+                >
+                  {s}
+                </button>
+              ))}
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-[#25D366]/45 px-1.5 py-0.5 text-[9px] text-[#25D366] hover:border-[#25D366]"
+              >
+                WhatsApp
+              </a>
+            </div>
+
+            <form onSubmit={onSubmit} className="flex gap-1.5 border-t border-line p-2">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask a question…"
+                className="min-w-0 flex-1 border border-line bg-ink px-2 py-1.5 text-xs text-cream outline-none focus:border-gold"
+                aria-label="Chat message"
+              />
+              <button
+                type="submit"
+                className="bg-gold px-2.5 py-1.5 text-xs font-semibold text-on-gold hover:bg-gold-bright"
+              >
+                Send
+              </button>
+            </form>
           </div>
 
           {showPhoneCard ? (
-            <div className="flex items-end gap-1.5 border-b border-line bg-ink-soft/50 px-2.5 py-2">
-              <div className="min-w-0 flex-1">
-                <p className="text-[9px] uppercase tracking-[0.12em] text-gold">
-                  Callback <span className="normal-case tracking-normal text-muted">(optional)</span>
-                </p>
-                <input
-                  type="tel"
-                  inputMode="numeric"
-                  autoComplete="tel"
-                  placeholder="Mobile number"
-                  value={phoneDraft}
-                  onChange={(e) => {
-                    setPhoneDraft(e.target.value);
-                    setPhoneError("");
-                  }}
-                  className="mt-1 w-full border border-line bg-ink px-2 py-1 text-[11px] text-cream outline-none focus:border-gold"
-                  aria-label="Optional callback mobile"
-                />
-                {phoneError ? (
-                  <p className="mt-0.5 text-[9px] text-red-400">{phoneError}</p>
-                ) : null}
-              </div>
+            <aside className="flex w-28 shrink-0 flex-col border-l border-line bg-ink-soft/70 px-2 py-2.5">
+              <p className="text-[9px] font-medium uppercase tracking-[0.12em] text-gold">
+                Callback
+              </p>
+              <p className="mt-0.5 text-[9px] leading-snug text-muted">Optional</p>
+              <input
+                type="tel"
+                inputMode="numeric"
+                autoComplete="tel"
+                placeholder="Mobile"
+                value={phoneDraft}
+                onChange={(e) => {
+                  setPhoneDraft(e.target.value);
+                  setPhoneError("");
+                }}
+                className="mt-2 w-full border border-line bg-ink px-1.5 py-1 text-[10px] text-cream outline-none focus:border-gold"
+                aria-label="Optional callback mobile"
+              />
+              {phoneError ? (
+                <p className="mt-1 text-[8px] leading-snug text-red-400">{phoneError}</p>
+              ) : null}
               <button
                 type="button"
                 disabled={savingPhone}
                 onClick={() => void savePhone(phoneDraft)}
-                className="shrink-0 bg-gold px-2 py-1 text-[10px] font-semibold text-on-gold hover:bg-gold-bright disabled:opacity-60"
+                className="mt-2 w-full bg-gold px-1 py-1.5 text-[10px] font-semibold text-on-gold hover:bg-gold-bright disabled:opacity-60"
               >
                 {savingPhone ? "…" : "Save"}
               </button>
               <button
                 type="button"
                 onClick={() => void savePhone("", { skip: true })}
-                className="shrink-0 border border-line px-2 py-1 text-[10px] text-cream/75 hover:border-gold hover:text-gold"
+                className="mt-1 w-full border border-line px-1 py-1.5 text-[10px] text-cream/75 hover:border-gold hover:text-gold"
               >
                 Skip
               </button>
-            </div>
+            </aside>
           ) : null}
-
-          {phone ? (
-            <p className="border-b border-line px-3 py-1 text-[10px] text-muted">
-              Callback: {phone}{" "}
-              <button
-                type="button"
-                className="text-gold hover:underline"
-                onClick={() => {
-                  setPhone("");
-                  setPhoneDismissed(false);
-                  setPhoneDraft("");
-                  try {
-                    localStorage.removeItem(PHONE_KEY);
-                  } catch {
-                    /* ignore */
-                  }
-                }}
-              >
-                clear
-              </button>
-            </p>
-          ) : null}
-
-          <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 py-2.5">
-            {messages.map((msg) => (
-              <div key={msg.id} className={`max-w-[92%] ${msg.role === "user" ? "ml-auto" : ""}`}>
-                <div
-                  className={`rounded-sm px-2.5 py-1.5 text-xs leading-relaxed sm:text-sm ${
-                    msg.role === "user"
-                      ? "bg-gold text-on-gold"
-                      : "bg-ink-soft text-cream/90"
-                  }`}
-                >
-                  {msg.text}
-                </div>
-                {msg.handoff ? (
-                  <a
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 inline-flex items-center rounded-sm bg-[#25D366] px-2.5 py-1 text-[10px] font-semibold text-on-gold hover:brightness-110"
-                  >
-                    Continue on WhatsApp
-                  </a>
-                ) : null}
-              </div>
-            ))}
-            <div ref={bottomRef} />
-          </div>
-
-          <div className="flex flex-wrap gap-1 border-t border-line px-2.5 py-1.5">
-            {suggestions.slice(0, 3).map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => ask(s)}
-                className="border border-line px-1.5 py-0.5 text-[9px] text-cream/75 hover:border-gold hover:text-gold"
-              >
-                {s}
-              </button>
-            ))}
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-[#25D366]/45 px-1.5 py-0.5 text-[9px] text-[#25D366] hover:border-[#25D366]"
-            >
-              WhatsApp
-            </a>
-          </div>
-
-          <form onSubmit={onSubmit} className="flex gap-1.5 border-t border-line p-2">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask a question…"
-              className="min-w-0 flex-1 border border-line bg-ink px-2 py-1.5 text-xs text-cream outline-none focus:border-gold"
-              aria-label="Chat message"
-            />
-            <button
-              type="submit"
-              className="bg-gold px-2.5 py-1.5 text-xs font-semibold text-on-gold hover:bg-gold-bright"
-            >
-              Send
-            </button>
-          </form>
         </div>
       ) : null}
 
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="self-start border border-line bg-ink px-3.5 py-2 text-sm font-medium text-cream shadow-lg hover:border-gold hover:text-gold"
+        className={`ask-nes-pulse border border-gold bg-gold px-5 py-3 text-sm font-semibold text-on-gold shadow-lg transition hover:bg-gold-bright ${
+          open ? "opacity-90" : ""
+        }`}
         aria-expanded={open}
         aria-label={open ? "Close chatbot" : "Open admissions chatbot"}
       >
