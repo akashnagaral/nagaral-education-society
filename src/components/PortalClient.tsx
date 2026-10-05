@@ -36,34 +36,41 @@ export function PortalClient() {
 
   const load = useCallback(async () => {
     setError("");
-    const me = await fetch("/api/portal/me");
-    if (!me.ok) {
-      router.replace("/login");
-      return;
-    }
-    const meData = (await me.json()) as { user: SessionUser };
-    if (meData.user.role === "ceo") {
-      window.open(
-        "https://script.google.com/macros/s/AKfycbx7iL-vaCTTP512qoJlPQDlX6kJiK47dJSbfO0Uq0ihj94ErWxzc3Nrhq8dBOw09Vkq/exec",
-        "_blank",
-        "noopener,noreferrer",
-      );
-      router.replace("/");
-      return;
-    }
-    setUser(meData.user);
+    try {
+      const me = await fetch("/api/portal/me");
+      if (!me.ok) {
+        router.replace("/login");
+        return;
+      }
+      const meData = (await me.json()) as { user: SessionUser };
+      if (meData.user.role === "ceo") {
+        window.open(
+          "https://script.google.com/macros/s/AKfycbx7iL-vaCTTP512qoJlPQDlX6kJiK47dJSbfO0Uq0ihj94ErWxzc3Nrhq8dBOw09Vkq/exec",
+          "_blank",
+          "noopener,noreferrer",
+        );
+        router.replace("/");
+        return;
+      }
+      setUser(meData.user);
 
-    const docsRes = await fetch("/api/portal/documents");
-    const docsData = (await docsRes.json()) as {
-      documents?: PortalDocument[];
-      error?: string;
-    };
-    if (!docsRes.ok) {
-      setError(docsData.error || "Could not load documents");
-    } else {
-      setDocs(docsData.documents ?? []);
+      const docsRes = await fetch("/api/portal/documents");
+      const docsData = (await docsRes.json()) as {
+        documents?: PortalDocument[];
+        error?: string;
+      };
+      if (!docsRes.ok) {
+        setError(docsData.error || "Could not load documents");
+      } else {
+        setDocs(docsData.documents ?? []);
+      }
+    } catch {
+      setError(
+        "Could not reach the portal server. Check your connection and try again.",
+      );
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [router]);
 
   useEffect(() => {

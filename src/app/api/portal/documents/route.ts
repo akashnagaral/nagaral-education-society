@@ -21,7 +21,13 @@ export async function GET() {
     return NextResponse.json({ documents });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Failed to load";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const friendly =
+      /fetch failed|ECONNREFUSED|ENOTFOUND|network|timeout|paused|unreachable/i.test(
+        message,
+      )
+        ? "Document storage is temporarily unreachable. If your Supabase project is paused, open the dashboard → Restore, wait 1–2 minutes, then refresh."
+        : message;
+    return NextResponse.json({ error: friendly }, { status: 503 });
   }
 }
 
@@ -80,7 +86,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ document });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Upload failed";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const friendly =
+      /fetch failed|ECONNREFUSED|ENOTFOUND|network|timeout|paused|unreachable/i.test(
+        message,
+      )
+        ? "Upload failed — document storage is unreachable. Restore your Supabase project if it is paused, then try again."
+        : message;
+    return NextResponse.json({ error: friendly }, { status: 503 });
   }
 }
 

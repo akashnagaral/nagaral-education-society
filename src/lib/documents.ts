@@ -164,19 +164,34 @@ export async function purgeOldestBeyondLimit(limit = MAX_PORTAL_DOCUMENTS) {
   return toRemove.length;
 }
 
+function friendlyDbError(error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  if (/fetch failed|ECONNREFUSED|ENOTFOUND|network|timeout|paused/i.test(message)) {
+    return "Document storage is temporarily unreachable. Open Supabase dashboard and Restore the project if it is paused, then refresh.";
+  }
+  return message || "Database error";
+}
+
 export async function listDocuments(): Promise<PortalDocument[]> {
   await purgeExpiredDocuments().catch(() => 0);
   await purgeOldestBeyondLimit().catch(() => 0);
 
   if (isSupabaseConfigured()) {
     const supabase = getSupabaseAdmin();
-    if (!supabase) return [];
-    const { data, error } = await supabase
-      .from("portal_documents")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
-    return (data ?? []).map(mapRow);
+    if (!supabase) return readLocalMeta();
+    try {
+      const { data, error } = await supabase
+        .from("portal_documents")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw new Error(error.message);
+      return (data ?? []).map(mapRow);
+    } catch (error) {
+      // Local fallback when Supabase is paused / offline (dev-friendly)
+      const local = await readLocalMeta().catch(() => [] as PortalDocument[]);
+      if (local.length) return local;
+      throw new Error(friendlyDbError(error));
+    }
   }
   return readLocalMeta();
 }
