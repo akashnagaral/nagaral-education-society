@@ -32,15 +32,15 @@ export function CollegePage({ college }: Props) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/65 to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-b from-hero-scrim/70 via-hero-scrim/65 to-hero-scrim" />
         <div className="section-pad relative mx-auto flex min-h-[70svh] max-w-6xl flex-col justify-end pb-14 pt-24">
           <p className="animate-rise text-xs uppercase tracking-[0.22em] text-gold">
             In collaboration with {site.name}® since {college.collaboratedSince}
           </p>
-          <h1 className="animate-rise-delay-1 mt-3 max-w-3xl font-[family-name:var(--font-display)] text-4xl leading-tight text-cream sm:text-5xl md:text-6xl">
+          <h1 className="animate-rise-delay-1 mt-3 max-w-3xl font-[family-name:var(--font-display)] text-4xl leading-tight text-hero-fg sm:text-5xl md:text-6xl">
             {college.name}
           </h1>
-          <p className="animate-rise-delay-2 mt-4 text-cream/80">{college.address}</p>
+          <p className="animate-rise-delay-2 mt-4 text-hero-fg-muted">{college.address}</p>
           {college.collegeCode ? (
             <p className="mt-1 text-sm text-gold">College code: {college.collegeCode}</p>
           ) : null}
@@ -49,20 +49,20 @@ export function CollegePage({ college }: Props) {
               href={site.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-ink hover:brightness-110"
+              className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-on-gold hover:brightness-110"
               aria-label="WhatsApp admissions"
             >
               <WhatsAppIcon className="h-6 w-6" />
             </a>
             <a
               href="#location"
-              className="border border-cream/35 px-5 py-3 text-sm text-cream hover:border-gold hover:text-gold"
+              className="border border-hero-fg/35 px-5 py-3 text-sm text-hero-fg hover:border-gold hover:text-gold"
             >
               Campus location
             </a>
             <Link
               href="/#contact"
-              className="border border-cream/35 px-5 py-3 text-sm text-cream hover:border-gold hover:text-gold"
+              className="border border-hero-fg/35 px-5 py-3 text-sm text-hero-fg hover:border-gold hover:text-gold"
             >
               Full contact
             </Link>

@@ -35,7 +35,7 @@ export function MapSection({ college }: Props) {
             href={college.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gold px-5 py-3 text-sm font-semibold text-ink hover:bg-gold-bright"
+            className="bg-gold px-5 py-3 text-sm font-semibold text-on-gold hover:bg-gold-bright"
           >
             Open in Google Maps
           </a>

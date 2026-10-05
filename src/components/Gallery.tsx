@@ -48,7 +48,7 @@ export function Gallery() {
             href={site.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-ink hover:brightness-110"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-on-gold hover:brightness-110"
             aria-label="WhatsApp"
           >
             <WhatsAppIcon className="h-5 w-5" />

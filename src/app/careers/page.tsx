@@ -28,7 +28,7 @@ export default function CareersPage() {
           <div className="mt-6 flex flex-wrap items-center gap-4">
             <a
               href={site.emailHref}
-              className="bg-gold px-5 py-3 text-sm font-semibold text-ink hover:bg-gold-bright"
+              className="bg-gold px-5 py-3 text-sm font-semibold text-on-gold hover:bg-gold-bright"
             >
               Apply via email
             </a>
@@ -39,7 +39,7 @@ export default function CareersPage() {
               className="inline-flex items-center gap-2 border border-line px-4 py-3 text-sm text-cream hover:border-gold hover:text-gold"
               aria-label="WhatsApp HR / admissions"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-ink">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-on-gold">
                 <WhatsAppIcon className="h-4 w-4" />
               </span>
               Enquire

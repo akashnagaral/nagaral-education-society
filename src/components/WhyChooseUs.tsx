@@ -46,7 +46,7 @@ export function WhyChooseUs() {
               pathways — not crowded classrooms.
             </p>
           </div>
-          <span className="admissions-blink rounded-sm bg-gold px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-ink">
+          <span className="admissions-blink rounded-sm bg-gold px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-on-gold">
             Admissions open
           </span>
         </div>
@@ -72,7 +72,7 @@ export function WhyChooseUs() {
             href={site.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gold px-5 py-3 text-sm font-semibold text-ink hover:bg-gold-bright"
+            className="bg-gold px-5 py-3 text-sm font-semibold text-on-gold hover:bg-gold-bright"
           >
             Enquire admissions
           </a>

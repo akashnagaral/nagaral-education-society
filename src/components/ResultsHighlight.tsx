@@ -30,7 +30,7 @@ export function ResultsHighlight() {
             </p>
           </div>
         </div>
-        <span className="admissions-blink shrink-0 rounded-sm bg-gold px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-ink">
+        <span className="admissions-blink shrink-0 rounded-sm bg-gold px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-on-gold">
           Admissions open
         </span>
       </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { SocialLinks } from "@/components/SocialIcons";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { site } from "@/lib/site-data";
 
@@ -65,31 +66,35 @@ export function Header() {
             className="flex items-center gap-2.5"
             iconClassName="h-4 w-4"
           />
+          <ThemeToggle />
           <a
             href={site.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-ink transition hover:brightness-110"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-on-gold transition hover:brightness-110"
             aria-label="WhatsApp"
           >
             <WhatsAppIcon className="h-5 w-5" />
           </a>
         </div>
 
-        <button
-          type="button"
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center border border-line text-cream lg:hidden"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="sr-only">Menu</span>
-          <div className="flex w-5 flex-col gap-1.5">
-            <span className={`h-px bg-cream transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
-            <span className={`h-px bg-cream transition ${open ? "opacity-0" : ""}`} />
-            <span className={`h-px bg-cream transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
-          </div>
-        </button>
+        <div className="ml-auto flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center border border-line text-cream"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span className="sr-only">Menu</span>
+            <div className="flex w-5 flex-col gap-1.5">
+              <span className={`h-px bg-cream transition ${open ? "translate-y-1.5 rotate-45" : ""}`} />
+              <span className={`h-px bg-cream transition ${open ? "opacity-0" : ""}`} />
+              <span className={`h-px bg-cream transition ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+            </div>
+          </button>
+        </div>
       </div>
 
       {open ? (

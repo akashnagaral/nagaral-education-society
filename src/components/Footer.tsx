@@ -67,7 +67,7 @@ export function Footer() {
                 className="inline-flex items-center gap-2 hover:text-gold"
                 aria-label="WhatsApp"
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#25D366] text-ink">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#25D366] text-on-gold">
                   <WhatsAppIcon className="h-3.5 w-3.5" />
                 </span>
                 {site.phone}

@@ -17,13 +17,13 @@ export function StickyContact() {
   if (minimized) {
     return (
       <div className="fixed bottom-5 right-5 z-[60] flex flex-col items-end gap-2">
-        <span className="admissions-blink rounded-sm bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-ink">
+        <span className="admissions-blink rounded-sm bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-on-gold">
           Admissions open
         </span>
         <button
           type="button"
           onClick={() => setMinimized(false)}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-ink shadow-lg hover:brightness-110"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-on-gold shadow-lg hover:brightness-110"
           aria-label="Expand quick contact"
           title="Quick contact"
         >
@@ -48,7 +48,7 @@ export function StickyContact() {
             className="mt-0.5 h-9 w-9 shrink-0 object-contain opacity-70"
           />
           <div>
-            <p className="admissions-blink inline-block rounded-sm bg-gold px-2 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-ink">
+            <p className="admissions-blink inline-block rounded-sm bg-gold px-2 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-on-gold">
               Admissions open
             </p>
             <p className="mt-2 text-sm font-medium text-cream">Quick contact</p>
@@ -70,7 +70,7 @@ export function StickyContact() {
           href={site.whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-ink hover:brightness-110"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-on-gold hover:brightness-110"
           aria-label="Open WhatsApp"
         >
           <WhatsAppIcon className="h-6 w-6" />

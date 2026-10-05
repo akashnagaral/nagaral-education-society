@@ -3,6 +3,7 @@ import { Fraunces, Sora } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { StickyContact } from "@/components/StickyContact";
+import { themeInitScript } from "@/lib/theme";
 import { site } from "@/lib/site-data";
 import "./globals.css";
 
@@ -103,7 +104,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${display.variable} ${body.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col bg-ink text-cream">
         <script
           type="application/ld+json"

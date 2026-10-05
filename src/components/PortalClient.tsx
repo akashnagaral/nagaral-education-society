@@ -170,7 +170,7 @@ export function PortalClient() {
             <button
               type="button"
               onClick={() => void logout()}
-              className="bg-gold px-3 py-2 text-sm font-semibold text-ink hover:bg-gold-bright"
+              className="bg-gold px-3 py-2 text-sm font-semibold text-on-gold hover:bg-gold-bright"
             >
               Log out
             </button>
@@ -360,7 +360,7 @@ export function PortalClient() {
             <button
               type="submit"
               disabled={uploading}
-              className="bg-gold px-5 py-3 text-sm font-semibold text-ink hover:bg-gold-bright disabled:opacity-60"
+              className="bg-gold px-5 py-3 text-sm font-semibold text-on-gold hover:bg-gold-bright disabled:opacity-60"
             >
               {uploading ? "Uploading…" : "Upload document"}
             </button>
